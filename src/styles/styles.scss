@@ -1,0 +1,345 @@
+/* Basic editor styles */
+
+:root {
+  --white: #ffffff;
+  --gray-1: #f5f5f5; /* 연한 회색 */
+  --gray-2: #e0e0e0; /* 조금 더 진한 회색 */
+  --gray-3: #bdbdbd; /* 중간 회색 */
+  --purple-light: #e0bbe4; /* 밝은 보라색 */
+  --purple: #9b59b6; /* 보라색 */
+  --purple-contrast: #6c3483; /* 대비되는 어두운 보라색 */
+  --black: #000000; /* 검은색 */
+  --shadow: rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+.tiptap {
+  :first-child {
+    margin-top: 0;
+  }
+
+  /* List styles */
+  ul,
+  ol {
+    padding: 0 1rem;
+    margin: 1.25rem 1rem 1.25rem 0.4rem;
+
+    li p {
+      margin-top: 0.25em;
+      margin-bottom: 0.25em;
+    }
+  }
+
+  /* Heading styles */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+    margin-top: 2.5rem;
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2 {
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: 1rem;
+  }
+
+  /* Code and preformatted text styles */
+  code {
+    background-color: var(--purple-light);
+    border-radius: 0.4rem;
+    color: var(--black);
+    font-size: 0.85rem;
+    padding: 0.25em 0.3em;
+  }
+
+  pre {
+    background: var(--black);
+    border-radius: 0.5rem;
+    color: var(--white);
+    font-family: "JetBrainsMono", monospace;
+    margin: 1.5rem 0;
+    padding: 0.75rem 1rem;
+
+    code {
+      background: none;
+      color: inherit;
+      font-size: 0.8rem;
+      padding: 0;
+    }
+  }
+
+  mark {
+    background-color: #faf594;
+    border-radius: 0.4rem;
+    box-decoration-break: clone;
+    padding: 0.1rem 0.3rem;
+  }
+
+  blockquote {
+    border-left: 3px solid var(--gray-3);
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--gray-2);
+    margin: 2rem 0;
+  }
+}
+
+/* Placeholder (at the top) */
+p.is-editor-empty:first-child::before {
+  color: var(--gray-3);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Bubble menu */
+.bubble-menu {
+  background-color: var(--white);
+  border: 1px solid var(--gray-1);
+  border-radius: 0.7rem;
+  box-shadow: 5px 5px 10px var(--shadow);
+  display: flex;
+  padding: 0.2rem;
+
+  button {
+    background-color: unset;
+    border: 1px solid var(--gray-2);
+
+    &:hover {
+      background-color: var(--gray-2);
+    }
+
+    &.is-active {
+      background-color: var(--gray-3);
+
+      &:hover {
+        background-color: var(--gray-3);
+      }
+    }
+  }
+}
+
+/* color group */
+.color-group {
+  position: relative;
+  display: inline-block;
+
+  input[type="color"] {
+    border: none;
+    padding: 0;
+    width: 40px; /* 원하는 크기로 조정 */
+    height: 20px;
+  }
+
+  button {
+    padding: 5px 5px;
+    background-color: unset;
+    border: 2px solid var(--gray-1);
+    border-radius: 0.3rem;
+    font-weight: bold;
+    box-sizing: border-box; //  border 두께에 상관없이 고정
+
+    &:hover {
+      border-color: var(--gray-3);
+      background-color: var(--white);
+    }
+
+    &.is-active {
+      border-color: var(--gray-3);
+      background-color: var(--white);
+
+      &:hover {
+        border-color: var(--gray-3);
+        background-color: var(--white);
+      }
+    }
+  }
+}
+
+// /*color item*/
+.color-item {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+  background-color: white;
+  background-color: var(--white);
+  border: 1px solid var(--gray-1);
+  border-radius: 0.7rem;
+  box-shadow: 5px 5px 10px var(--shadow);
+  padding: 10px 10px 10px 10px;
+}
+
+/* DragHandle */
+.ProseMirror {
+  padding-inline: 4rem;
+
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  [data-id] {
+    border: 3px solid #0d0d0d;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    position: relative;
+    margin-top: 1.5rem;
+    padding: 2rem 1rem 1rem;
+
+    &::before {
+      content: attr(data-id);
+      background-color: #0d0d0d;
+      font-size: 0.6rem;
+      letter-spacing: 1px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #fff;
+      position: absolute;
+      top: 0;
+      padding: 0.25rem 0.75rem;
+      border-radius: 0 0 0.5rem 0.5rem;
+    }
+  }
+}
+
+.drag-handle {
+  align-items: center;
+  background: #f0f0f0;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: grab;
+  display: flex;
+  height: 1.5rem;
+  justify-content: center;
+  width: 1.5rem;
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+/* tableContent */
+
+.col-group {
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: 540px) {
+    flex-direction: column-reverse;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  //overflow: auto;  ??????????이거뭔지 찾아보기
+
+  padding-right: 30px;
+}
+
+// .sidebar {
+//   border-left: 1px solid var(--gray-3);
+//   flex-grow: 0;
+//   flex-shrink: 0;
+//   padding: 1rem;
+//   width: 15rem;
+//   position: sticky;
+//   height: 100vh;
+//   top: 0;
+
+//   @media (min-width: 800px) {
+//     width: 20rem;
+//   }
+
+//   @media (max-width: 540px) {
+//     border-bottom: 1px solid var(--gray-3);
+//     border-left: unset;
+//     width: 100%;
+//     height: auto;
+//     position: unset;
+//     padding: 1.5rem;
+//   }
+// }
+
+.sidebar-options {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1rem;
+  position: sticky;
+  top: 1rem;
+}
+
+.table-of-contents {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.875rem;
+  gap: 0.25rem;
+  overflow: auto;
+  text-decoration: none;
+
+  > div {
+    border-radius: 0.25rem;
+    padding-left: calc(0.875rem * (var(--level) - 1));
+    transition: all 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
+
+    &:hover {
+      background-color: var(--gray-2);
+    }
+  }
+
+  .empty-state {
+    color: var(--gray-5);
+    user-select: none;
+  }
+
+  .is-active a {
+    color: var(--purple);
+  }
+
+  .is-scrolled-over a {
+    color: var(--gray-5);
+  }
+
+  a {
+    color: var(--black);
+    display: flex;
+    gap: 0.25rem;
+    text-decoration: none;
+
+    &::before {
+      content: attr(data-item-index) ".";
+    }
+  }
+}
