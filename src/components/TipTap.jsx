@@ -3,9 +3,6 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Placeholder from "@tiptap/extension-placeholder";
 import { Color } from "@tiptap/extension-color";
-import Document from "@tiptap/extension-document";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
 import TextStyle from "@tiptap/extension-text-style";
 import {
   getHierarchicalIndexes,
@@ -30,9 +27,6 @@ const TipTap = () => {
     extensions: [
       StarterKit,
       Underline,
-      Document,
-      Paragraph,
-      Text,
       TextStyle,
       Color,
       TableOfContents.configure({
