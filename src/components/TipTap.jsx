@@ -23,6 +23,7 @@ const MemorizedToC = React.memo(ToC);
 
 const TipTap = () => {
   const [items, setItems] = useState([]);
+  const [lastSaved] = useState(localStorage.getItem("savedData") || "");
 
   // 텍스트 입력 부분
   const editor = useEditor({
@@ -44,17 +45,22 @@ const TipTap = () => {
         placeholder: "Write something ...",
       }),
     ],
+    content: lastSaved,
   });
 
   // 기본 세팅은 true
   const [isEditable, setIsEditable] = useState(true);
 
-  // 에디터(텍스트)나 체크박스 변화시 재렌더링
+  // editable (eidtor 수정 가능 여부) 바뀐 경우 재렌더링
   useEffect(() => {
     if (editor) {
       editor.setEditable(isEditable);
     }
-  }, [isEditable, editor]);
+
+    // 자동 저장
+    const html = editor.getHTML();
+    localStorage.setItem("savedData", html);
+  }, [isEditable, editor, editor.getHTML()]);
 
   const editHandler = () => {
     setIsEditable(!isEditable);
