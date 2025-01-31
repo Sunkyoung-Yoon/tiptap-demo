@@ -1,15 +1,3 @@
-import {
-  FaBold,
-  FaHeading,
-  FaItalic,
-  FaListOl,
-  FaListUl,
-  FaQuoteLeft,
-  FaRedo,
-  FaStrikethrough,
-  FaUnderline,
-  FaUndo,
-} from "react-icons/fa";
 import styles from "styles/menubar.module.scss";
 
 const MenuBar = ({ editor }) => {
