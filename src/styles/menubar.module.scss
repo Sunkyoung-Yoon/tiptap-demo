@@ -1,0 +1,109 @@
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 5px 10px;
+  border-bottom: 1px solid #cacad6;
+
+  .itemBox {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 100%;
+
+    .toolbarBtn {
+      width: 30px;
+      height: 30px;
+      background-size: 26px;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      padding: 5px 5px;
+      background-color: unset;
+      border: 2px solid var(--gray-1);
+      border-radius: 0.3rem;
+      font-weight: bold;
+      box-sizing: border-box;
+
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+
+      &:hover {
+        border-color: var(--gray-3);
+        background-color: var(--white);
+      }
+
+      .none {
+        border-color: var(--gray-3);
+        background-color: var(--white);
+      }
+    }
+
+    .active {
+      border-color: var(--gray-3);
+      background-color: var(--white);
+    }
+  }
+
+  .line {
+    width: 1px;
+    height: 25px;
+    margin: 0 15px;
+    background-color: #cacad6;
+  }
+}
+
+.h1 {
+  background-image: url("/assets/icons/editor_h1.svg");
+}
+
+.h2 {
+  background-image: url("/assets/icons/editor_h2.svg");
+}
+
+.h3 {
+  background-image: url("/assets/icons/editor_h3.svg");
+}
+
+.bold {
+  background-image: url("/assets/icons/editor_bold.svg");
+}
+
+.italic {
+  background-image: url("/assets/icons/editor_italic.svg");
+}
+
+.underline {
+  background-image: url("/assets/icons/editor_underline.svg");
+}
+
+.strike {
+  background-image: url("/assets/icons/editor_strike.svg");
+}
+
+.bulleted {
+  background-size: 24px !important;
+  background-image: url("/assets/icons/editor_list_bulleted.svg");
+}
+
+.numbered {
+  background-size: 24px !important;
+  background-image: url("/assets/icons/editor_list_numbered.svg");
+}
+
+.quote {
+  background-image: url("/assets/icons/editor_quote.svg");
+}
+
+.link {
+  background-image: url("/assets/icons/editor_link.svg");
+}
+
+.undo {
+  background-image: url("/assets/icons/editor_undo.svg");
+}
+
+.redo {
+  background-image: url("/assets/icons/editor_redo.svg");
+}
