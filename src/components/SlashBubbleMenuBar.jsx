@@ -11,26 +11,27 @@ import {
 } from "react-icons/fa";
 import ColorList from "components/ColorList";
 
-const BubbleMenuBar = ({ editor }) => {
-  if (!editor) {
-    return null;
-  }
+const SlashBubbleMenuBar = ({ editor, showMenu }) => {
+  // console.log(showMenu);
+
   return (
     <div>
       <BubbleMenu
         editor={editor}
         tippyOptions={{
           duration: 100,
-          placement: "bottom-start",
-          zIndex: 10,
+          placement: "top-start",
+          zIndex: 20,
+          trigger: "manual",
         }}
+        shouldShow={() => showMenu}
       >
         <div className="bubble-menu">
           <button
             onClick={() => editor.chain().focus().toggleBold().run()}
             className={editor.isActive("bold") ? "is-active" : ""}
           >
-            <FaBold />
+            bold
           </button>
           <button
             onClick={() => editor.chain().focus().toggleItalic().run()}
@@ -93,4 +94,4 @@ const BubbleMenuBar = ({ editor }) => {
   );
 };
 
-export default BubbleMenuBar;
+export default SlashBubbleMenuBar;

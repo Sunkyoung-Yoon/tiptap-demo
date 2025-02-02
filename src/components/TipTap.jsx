@@ -15,12 +15,14 @@ import MenuBar from "components/MenuBar";
 import DragHandleBar from "components/DragHandleBar";
 import IsEditableMenu from "components/IsEditableMenu";
 import { ToC } from "components/ToC";
+import SlashBubbleMenuBar from "components/SlashBubbleMenuBar";
 
 const MemorizedToC = React.memo(ToC);
 
 const TipTap = () => {
   const [items, setItems] = useState([]);
   const [lastSaved] = useState(localStorage.getItem("savedData") || "");
+  const [showMenu, setShowMenu] = useState(false);
 
   // 텍스트 입력 부분
   const editor = useEditor({
@@ -45,7 +47,7 @@ const TipTap = () => {
   // 기본 세팅은 true
   const [isEditable, setIsEditable] = useState(true);
 
-  // editable (eidtor 수정 가능 여부) 바뀐 경우 재렌더링
+  // editor나 editable 바뀐 경우 재렌더링
   useEffect(() => {
     if (editor) {
       editor.setEditable(isEditable);
@@ -60,6 +62,19 @@ const TipTap = () => {
     setIsEditable(!isEditable);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "/") {
+      setShowMenu(true);
+    } else {
+      setShowMenu(false);
+    }
+  };
+
+  // 마우스 클릭 시 메뉴 숨기기
+  const handleMouseDown = () => {
+    setShowMenu(false);
+  };
+
   if (!editor) {
     return null;
   }
@@ -70,10 +85,17 @@ const TipTap = () => {
         <div className="main">
           <IsEditableMenu isEditable={isEditable} editHandler={editHandler} />
           <MenuBar editor={editor} />
+          {showMenu && (
+            <SlashBubbleMenuBar editor={editor} showMenu={showMenu} />
+          )}
           <BubbleMenuBar editor={editor} />
           <DragHandleBar editor={editor} />
           {/* 입력창 */}
-          <EditorContent editor={editor} />
+          <EditorContent
+            editor={editor}
+            onKeyDown={handleKeyDown}
+            onMouseDown={handleMouseDown}
+          />
         </div>
         <div className="sidebar">
           <div className="sidebar-options">
