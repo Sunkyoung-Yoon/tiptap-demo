@@ -20,6 +20,7 @@ import FileHandler from "@tiptap-pro/extension-file-handler";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import CustomCodeBlockLowlight from "utils/CodeBlockIndent";
+import { Indent } from "utils/Indent";
 import "highlight.js/styles/stackoverflow-dark.min.css";
 
 const MemorizedToC = React.memo(ToC);
@@ -40,6 +41,7 @@ const TipTap = () => {
       TextStyle,
       Color,
       CustomCodeBlockLowlight,
+      Indent,
       TableOfContents.configure({
         getIndex: getHierarchicalIndexes,
         onUpdate(content) {
