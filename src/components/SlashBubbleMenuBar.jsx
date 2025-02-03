@@ -11,20 +11,17 @@ import {
 } from "react-icons/fa";
 import ColorList from "components/ColorList";
 
-const SlashBubbleMenuBar = ({ editor, showMenu }) => {
-  // console.log(showMenu);
-
+const SlashBubbleMenuBar = ({ editor }) => {
   return (
     <div>
       <BubbleMenu
         editor={editor}
         tippyOptions={{
           duration: 100,
-          placement: "top-start",
-          zIndex: 20,
+          placement: "bottom-start",
           trigger: "manual",
         }}
-        shouldShow={() => showMenu}
+        shouldShow={() => true}
       >
         <div className="bubble-menu">
           <button

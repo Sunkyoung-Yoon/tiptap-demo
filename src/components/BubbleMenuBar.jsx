@@ -21,8 +21,7 @@ const BubbleMenuBar = ({ editor }) => {
         editor={editor}
         tippyOptions={{
           duration: 100,
-          placement: "bottom-start",
-          zIndex: 10,
+          placement: "top-start",
         }}
       >
         <div className="bubble-menu">

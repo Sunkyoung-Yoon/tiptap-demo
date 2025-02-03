@@ -85,10 +85,8 @@ const TipTap = () => {
         <div className="main">
           <IsEditableMenu isEditable={isEditable} editHandler={editHandler} />
           <MenuBar editor={editor} />
-          {showMenu && (
-            <SlashBubbleMenuBar editor={editor} showMenu={showMenu} />
-          )}
-          <BubbleMenuBar editor={editor} />
+          <div>{showMenu && <SlashBubbleMenuBar editor={editor} />}</div>
+          <div>{!showMenu && <BubbleMenuBar editor={editor} />}</div>
           <DragHandleBar editor={editor} />
           {/* 입력창 */}
           <EditorContent
