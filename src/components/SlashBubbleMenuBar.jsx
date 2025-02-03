@@ -1,7 +1,6 @@
 import styles from "styles/slashmenubar.module.scss";
 
 import { BubbleMenu } from "@tiptap/react";
-import ColorList from "components/ColorList";
 
 const SlashBubbleMenuBar = ({ editor }) => {
   return (
@@ -16,6 +15,7 @@ const SlashBubbleMenuBar = ({ editor }) => {
         shouldShow={() => true}
       >
         <div className={styles.slashbar}>
+          <div className={styles.intro}>기본 블록</div>
           <button
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 1 }).run()
@@ -102,9 +102,6 @@ const SlashBubbleMenuBar = ({ editor }) => {
               <p className={styles.btnDesc}>인용문을 작성하세요. </p>
             </div>
           </button>
-          <div>
-            <ColorList editor={editor} />
-          </div>
         </div>
       </BubbleMenu>
     </div>
