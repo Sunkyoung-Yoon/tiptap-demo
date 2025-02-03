@@ -19,6 +19,8 @@ import SlashBubbleMenuBar from "components/SlashBubbleMenuBar";
 import FileHandler from "@tiptap-pro/extension-file-handler";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
+import CustomCodeBlockLowlight from "utils/CodeBlockIndent";
+import "highlight.js/styles/stackoverflow-dark.min.css";
 
 const MemorizedToC = React.memo(ToC);
 
@@ -31,10 +33,13 @@ const TipTap = () => {
   // 텍스트 입력 부분
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        codeBlock: false,
+      }),
       Underline,
       TextStyle,
       Color,
+      CustomCodeBlockLowlight,
       TableOfContents.configure({
         getIndex: getHierarchicalIndexes,
         onUpdate(content) {
