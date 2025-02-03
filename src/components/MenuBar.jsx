@@ -8,9 +8,20 @@ const MenuBar = ({ editor }) => {
         <button
           type="button"
           onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 2 }).run()
+            editor.chain().focus().toggleHeading({ level: 1 }).run()
           }
           className={`${styles.toolbarBtn} ${styles.h1} ${
+            editor.isActive("heading", { level: 1 })
+              ? styles.active
+              : styles.none
+          }`}
+        ></button>
+        <button
+          type="button"
+          onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 2 }).run()
+          }
+          className={`${styles.toolbarBtn} ${styles.h2} ${
             editor.isActive("heading", { level: 2 })
               ? styles.active
               : styles.none
@@ -20,7 +31,7 @@ const MenuBar = ({ editor }) => {
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 3 }).run()
           }
-          className={`${styles.toolbarBtn} ${styles.h2} ${
+          className={`${styles.toolbarBtn} ${styles.h3} ${
             editor.isActive("heading", { level: 3 })
               ? styles.active
               : styles.none

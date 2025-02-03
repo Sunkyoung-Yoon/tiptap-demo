@@ -51,11 +51,19 @@ const BubbleMenuBar = ({ editor }) => {
           </button>
           <button
             onClick={() =>
+              editor.chain().focus().toggleHeading({ level: 1 }).run()
+            }
+            className={editor.isActive("heading1") ? "is-active" : ""}
+          >
+            <FaHeading className="heading1" />
+          </button>
+          <button
+            onClick={() =>
               editor.chain().focus().toggleHeading({ level: 2 }).run()
             }
             className={editor.isActive("heading2") ? "is-active" : ""}
           >
-            <FaHeading />
+            <FaHeading className="heading2" />
           </button>
           <button
             onClick={() =>
