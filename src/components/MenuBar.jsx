@@ -91,6 +91,14 @@ const MenuBar = ({ editor }) => {
           }`}
         ></button>
       </div>
+      <div className={styles.line} />
+      <div className={styles.itemBox}>
+        <input type="file" id="file-upload" className={styles.file} />
+        <label
+          for="file-upload"
+          className={`${styles.toolbarBtn} ${styles.fileLabel}`}
+        />
+      </div>
     </div>
   );
 };
