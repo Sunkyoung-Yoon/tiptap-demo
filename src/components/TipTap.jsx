@@ -16,12 +16,15 @@ import DragHandleBar from "components/DragHandleBar";
 import IsEditableMenu from "components/IsEditableMenu";
 import { ToC } from "components/ToC";
 import SlashBubbleMenuBar from "components/SlashBubbleMenuBar";
+import FileHandler from "@tiptap-pro/extension-file-handler";
+import Image from "@tiptap/extension-image";
 
 const MemorizedToC = React.memo(ToC);
 
 const TipTap = () => {
   const [items, setItems] = useState([]);
-  const [lastSaved] = useState(localStorage.getItem("savedData") || "");
+  const lastdata = JSON.parse(localStorage.getItem("savedData"));
+  const lastSaved = lastdata ? lastdata : null;
   const [showMenu, setShowMenu] = useState(false);
 
   // 텍스트 입력 부분
@@ -35,6 +38,58 @@ const TipTap = () => {
         getIndex: getHierarchicalIndexes,
         onUpdate(content) {
           setItems(content);
+        },
+      }),
+      Image,
+      FileHandler.configure({
+        allowedMimeTypes: [
+          "image/png",
+          "image/jpeg",
+          "image/gif",
+          "image/webp",
+        ],
+        onDrop: (currentEditor, files, pos) => {
+          files.forEach((file) => {
+            const fileReader = new FileReader();
+
+            fileReader.readAsDataURL(file);
+            fileReader.onload = () => {
+              currentEditor
+                .chain()
+                .insertContentAt(pos, {
+                  type: "image",
+                  attrs: {
+                    src: fileReader.result,
+                  },
+                })
+                .focus()
+                .run();
+            };
+          });
+        },
+        onPaste: (currentEditor, files, htmlContent) => {
+          files.forEach((file) => {
+            if (htmlContent) {
+              console.log(htmlContent);
+              return false;
+            }
+
+            const fileReader = new FileReader();
+
+            fileReader.readAsDataURL(file);
+            fileReader.onload = () => {
+              currentEditor
+                .chain()
+                .insertContentAt(currentEditor.state.selection.anchor, {
+                  type: "image",
+                  attrs: {
+                    src: fileReader.result,
+                  },
+                })
+                .focus()
+                .run();
+            };
+          });
         },
       }),
       Placeholder.configure({
@@ -54,9 +109,9 @@ const TipTap = () => {
     }
 
     // 자동 저장
-    const html = editor.getHTML();
-    localStorage.setItem("savedData", html);
-  }, [isEditable, editor, editor.getHTML()]);
+    const jsonContent = editor.getJSON();
+    localStorage.setItem("savedData", JSON.stringify(jsonContent));
+  }, [isEditable, editor, editor.getJSON()]);
 
   const editHandler = () => {
     setIsEditable(!isEditable);
