@@ -18,6 +18,7 @@ import { ToC } from "components/ToC";
 import SlashBubbleMenuBar from "components/SlashBubbleMenuBar";
 import FileHandler from "@tiptap-pro/extension-file-handler";
 import Image from "@tiptap/extension-image";
+import Link from "@tiptap/extension-link";
 
 const MemorizedToC = React.memo(ToC);
 
@@ -41,29 +42,61 @@ const TipTap = () => {
         },
       }),
       Image,
+      Link.configure({
+        openOnClick: true, // 링크 클릭 시 새 창에서 열기
+        linkOnPaste: false, // URL 붙여넣기 시 자동 링크 생성 방지
+      }),
       FileHandler.configure({
         allowedMimeTypes: [
           "image/png",
           "image/jpeg",
           "image/gif",
           "image/webp",
+          "application/pdf",
+          "application/msword",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "text/plain",
         ],
         onDrop: (currentEditor, files, pos) => {
           files.forEach((file) => {
             const fileReader = new FileReader();
+            const mimeType = file.type;
 
             fileReader.readAsDataURL(file);
             fileReader.onload = () => {
-              currentEditor
-                .chain()
-                .insertContentAt(pos, {
-                  type: "image",
-                  attrs: {
-                    src: fileReader.result,
-                  },
-                })
-                .focus()
-                .run();
+              // 이미지 파일 처리
+              if (mimeType.startsWith("image/")) {
+                currentEditor
+                  .chain()
+                  .insertContentAt(pos, {
+                    type: "image",
+                    attrs: {
+                      src: fileReader.result,
+                    },
+                  })
+                  .focus()
+                  .run();
+              } else {
+                // 기타 파일 (pdf, docs, txt 등) 처리
+                // ** download는 추후 서버와 연동 후 구현 예정
+                currentEditor
+                  .chain()
+                  .insertContentAt(pos, {
+                    type: "text",
+                    text: file.name,
+                    marks: [
+                      {
+                        type: "link",
+                        attrs: {
+                          href: fileReader.result,
+                          download: file.name,
+                        },
+                      },
+                    ],
+                  })
+                  .focus()
+                  .run();
+              }
             };
           });
         },
@@ -75,19 +108,44 @@ const TipTap = () => {
             }
 
             const fileReader = new FileReader();
+            const mimeType = file.type;
 
             fileReader.readAsDataURL(file);
             fileReader.onload = () => {
-              currentEditor
-                .chain()
-                .insertContentAt(currentEditor.state.selection.anchor, {
-                  type: "image",
-                  attrs: {
-                    src: fileReader.result,
-                  },
-                })
-                .focus()
-                .run();
+              if (mimeType.startsWith("image/")) {
+                // 이미지 파일 처리
+                currentEditor
+                  .chain()
+                  .insertContentAt(currentEditor.state.selection.anchor, {
+                    type: "image",
+                    attrs: {
+                      src: fileReader.result,
+                    },
+                  })
+                  .focus()
+                  .run();
+              } else {
+                // 기타 파일 처리 (링크로 삽입)
+                // ** download는 추후 서버와 연동 후 구현 예정
+                currentEditor
+                  .chain()
+                  .insertContentAt(currentEditor.state.selection.anchor, {
+                    type: "text",
+                    text: file.name,
+                    marks: [
+                      {
+                        type: "link",
+                        attrs: {
+                          href: fileReader.result,
+                          download: file.name,
+                          type: file.type,
+                        },
+                      },
+                    ],
+                  })
+                  .focus()
+                  .run();
+              }
             };
           });
         },
