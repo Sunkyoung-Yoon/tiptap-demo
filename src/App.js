@@ -1,5 +1,6 @@
 import "./App.css";
 import Tiptap from "components/TipTap";
+import "highlight.js/styles/stackoverflow-dark.min.css";
 
 function App() {
   return (

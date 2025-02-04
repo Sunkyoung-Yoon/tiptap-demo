@@ -6,14 +6,16 @@
   border: 1px solid var(--gray-1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
-  width: 400px;
-  max-height: 350px;
+  width: 300px;
+  max-height: 250px;
   overflow-y: auto; // height 초과되면 스크롤
   padding-right: 4px;
   background-color: var(--white);
 
   .intro {
+    font-size: 12px;
     color: #333;
+    margin-bottom: 4px;
   }
 
   /* 전체 버튼 스타일 */
@@ -26,12 +28,12 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%; /* 부모 요소에 맞춰 버튼 너비를 100%로 설정 */
-    height: 70px;
+    height: 50px;
     margin-right: 10px;
 
     .btnImage {
-      width: 50px;
-      height: 50px;
+      width: 30px;
+      height: 30px;
       border-radius: 8px;
       background-size: cover;
       background-position: center;
@@ -43,12 +45,13 @@
     .btnContent {
       display: flex;
       flex-direction: column; /* 텍스트를 위아래로 배치 */
-      justify-content: space-between; /* 위아래로 균형있게 배치 */
+      justify-content: center;
+      gap: 8px; /* 위아래 간격 동일하게 */
       text-align: left;
 
       /* 제목 (위쪽) */
       .btnTitle {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
         color: #333;
         margin: 0;
@@ -56,9 +59,9 @@
 
       /* 내용 (아래쪽) */
       .btnDesc {
-        font-size: 14px;
+        font-size: 12px;
         color: #666;
-        margin-top: 4px;
+        margin: 0;
       }
     }
 
