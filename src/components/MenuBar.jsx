@@ -91,15 +91,11 @@ const MenuBar = ({ editor }) => {
       <div className={styles.itemBox}>
         <button
           onClick={() => editor.chain().focus().undo().run()}
-          className={`${styles.toolbarBtn} ${styles.undo} ${
-            editor.isActive("blockquote") ? styles.active : styles.none
-          }`}
+          className={`${styles.toolbarBtn} ${styles.undo} `}
         ></button>
         <button
           onClick={() => editor.chain().focus().redo().run()}
-          className={`${styles.toolbarBtn} ${styles.redo} ${
-            editor.isActive("blockquote") ? styles.active : styles.none
-          }`}
+          className={`${styles.toolbarBtn} ${styles.redo} `}
         ></button>
       </div>
       <div className={styles.line} />
