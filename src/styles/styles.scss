@@ -175,14 +175,15 @@ p.is-editor-empty:first-child::before {
 .bubble-menu {
   background-color: var(--white);
   border: 1px solid var(--gray-1);
-  border-radius: 0.7rem;
   box-shadow: 5px 5px 10px var(--shadow);
   display: flex;
   padding: 0.2rem;
+  width: 390px; /* 내용에 맞게 버튼 크기 조정 */
 
   button {
     background-color: unset;
     border: 1px solid var(--gray-2);
+    white-space: nowrap; /* 줄바꿈 방지 */
 
     &:hover {
       background-color: var(--gray-2);
@@ -198,6 +199,13 @@ p.is-editor-empty:first-child::before {
   }
 }
 
+.color-list {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  margin-left: 5px;
+}
+
 /* color group */
 .color-group {
   position: relative;
@@ -206,32 +214,16 @@ p.is-editor-empty:first-child::before {
   input[type="color"] {
     border: none;
     padding: 0;
-    width: 40px; /* 원하는 크기로 조정 */
+    width: 35px; /* 원하는 크기로 조정 */
     height: 20px;
   }
 
   button {
     padding: 5px 5px;
     background-color: unset;
-    border: 2px solid var(--gray-1);
-    border-radius: 0.3rem;
+    border: none;
     font-weight: bold;
     box-sizing: border-box; //  border 두께에 상관없이 고정
-
-    &:hover {
-      border-color: var(--gray-3);
-      background-color: var(--white);
-    }
-
-    &.is-active {
-      border-color: var(--gray-3);
-      background-color: var(--white);
-
-      &:hover {
-        border-color: var(--gray-3);
-        background-color: var(--white);
-      }
-    }
   }
 }
 
@@ -394,4 +386,40 @@ p.is-editor-empty:first-child::before {
       content: attr(data-item-index) ".";
     }
   }
+}
+
+.comment-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.comment-textarea {
+  width: 100%;
+  height: 80px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  resize: none;
+}
+
+.comment-submit-btn {
+  padding: 6px 12px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comment-submit-btn:hover {
+  background: #0056b3;
 }

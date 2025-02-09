@@ -10,21 +10,40 @@ import {
   FaUnderline,
 } from "react-icons/fa";
 import ColorList from "components/ColorList";
+import CommentInput from "components/CommentInput";
+import { useState } from "react";
 
-const BubbleMenuBar = ({ editor }) => {
+const BubbleMenuBar = ({ editor, user }) => {
+  const { from, to } = editor.state.selection;
+  const selectedText = editor.state.doc.textBetween(from, to, " ");
+
+  const [showCommentInput, setShowCommentInput] = useState(false);
+
+  const commentInputHandler = () => {
+    setShowCommentInput(!showCommentInput);
+  };
+
   if (!editor) {
     return null;
   }
+
   return (
     <div>
       <BubbleMenu
         editor={editor}
         tippyOptions={{
           duration: 100,
-          placement: "top-start",
+          placement: "bottom-start",
         }}
       >
         <div className="bubble-menu">
+          <div className="comment">
+            <label>
+              <button onClick={commentInputHandler}>
+                <p>댓글</p>
+              </button>
+            </label>
+          </div>
           <button
             onClick={() => editor.chain().focus().toggleBold().run()}
             className={editor.isActive("bold") ? "is-active" : ""}
@@ -91,9 +110,18 @@ const BubbleMenuBar = ({ editor }) => {
           >
             <FaQuoteLeft />
           </button>
-          <div>
+          <div className="color-list">
             <ColorList editor={editor} />
           </div>
+        </div>
+        <div>
+          {showCommentInput && (
+            <CommentInput
+              editor={editor}
+              user={user}
+              selectedText={selectedText}
+            />
+          )}
         </div>
       </BubbleMenu>
     </div>

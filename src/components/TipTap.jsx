@@ -23,6 +23,8 @@ import CustomCodeBlockLowlight from "utils/CodeBlockIndent";
 import { Indent } from "utils/Indent";
 import "highlight.js/styles/stackoverflow-dark.min.css";
 
+import { useUser } from "hooks/useUser";
+
 const MemorizedToC = React.memo(ToC);
 
 const TipTap = () => {
@@ -30,6 +32,8 @@ const TipTap = () => {
   const lastdata = JSON.parse(localStorage.getItem("savedData"));
   const lastSaved = lastdata ? lastdata : null;
   const [showMenu, setShowMenu] = useState(false);
+
+  const user = useUser();
 
   // 텍스트 입력 부분
   const editor = useEditor({
@@ -206,7 +210,9 @@ const TipTap = () => {
           <IsEditableMenu isEditable={isEditable} editHandler={editHandler} />
           <MenuBar editor={editor} />
           <div>{showMenu && <SlashBubbleMenuBar editor={editor} />}</div>
-          <div>{!showMenu && <BubbleMenuBar editor={editor} />}</div>
+          <div>
+            {!showMenu && <BubbleMenuBar editor={editor} user={user} />}
+          </div>
           <DragHandleBar editor={editor} />
           {/* 입력창 */}
           <EditorContent
