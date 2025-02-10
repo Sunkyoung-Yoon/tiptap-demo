@@ -335,7 +335,7 @@ p.is-editor-empty:first-child::before {
 //   }
 // }
 
-.sidebar-options {
+.sidebar-options-left {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -343,6 +343,7 @@ p.is-editor-empty:first-child::before {
   gap: 1rem;
   position: sticky;
   top: 1rem;
+  padding-right: 50px;
 }
 
 .table-of-contents {
@@ -388,6 +389,17 @@ p.is-editor-empty:first-child::before {
   }
 }
 
+.sidebar-options-right {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1rem;
+  position: sticky;
+  top: 1rem;
+  padding-left: 50px;
+}
+
 .comment-input-container {
   display: flex;
   flex-direction: column;
@@ -422,4 +434,53 @@ p.is-editor-empty:first-child::before {
 
 .comment-submit-btn:hover {
   background: #0056b3;
+}
+
+.comment-list {
+  width: 150px;
+}
+
+.comment-card {
+  width: 150px;
+  border: 3px solid var(--gray-1);
+  border-radius: 0.5rem;
+  padding-left: 20px;
+  padding-bottom: 10px;
+
+  display: flex;
+  flex-direction: column; /* 텍스트를 위아래로 배치 */
+  justify-content: center;
+  gap: 2px; /* 위아래 간격 동일하게 */
+  text-align: left;
+
+  .comment-card-top {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+
+    display: flex; /* 내부 요소를 가로로 배치 */
+    align-items: center; /* 수직 가운데 정렬 */
+
+    .comment-card-date {
+      font-size: 14px;
+      color: gray;
+      padding-left: 10px;
+    }
+  }
+
+  .comment-card-bottom {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+
+    .comment-card-selectedText {
+      display: inline-block;
+      padding: 0px 5px 0px 5px;
+      border-left: 2px solid orange;
+      border-right: 2px solid orange;
+      color: gray;
+    }
+  }
 }

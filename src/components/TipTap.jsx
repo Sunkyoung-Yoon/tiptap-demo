@@ -22,7 +22,7 @@ import Link from "@tiptap/extension-link";
 import CustomCodeBlockLowlight from "utils/CodeBlockIndent";
 import { Indent } from "utils/Indent";
 import "highlight.js/styles/stackoverflow-dark.min.css";
-
+import CommentList from "components/CommentList";
 import { useUser } from "hooks/useUser";
 
 const MemorizedToC = React.memo(ToC);
@@ -206,6 +206,14 @@ const TipTap = () => {
   return (
     <>
       <div className="col-group">
+        <div className="sidebar">
+          <div className="sidebar-options-left">
+            <div className="label-large">Table of contents</div>
+            <div className="table-of-contents">
+              <MemorizedToC editor={editor} items={items} />
+            </div>
+          </div>
+        </div>
         <div className="main">
           <IsEditableMenu isEditable={isEditable} editHandler={editHandler} />
           <MenuBar editor={editor} />
@@ -222,10 +230,10 @@ const TipTap = () => {
           />
         </div>
         <div className="sidebar">
-          <div className="sidebar-options">
-            <div className="label-large">Table of contents</div>
-            <div className="table-of-contents">
-              <MemorizedToC editor={editor} items={items} />
+          <div className="sidebar-options-right">
+            <div className="label-large">Comments</div>
+            <div className="comemnt">
+              <CommentList />
             </div>
           </div>
         </div>
