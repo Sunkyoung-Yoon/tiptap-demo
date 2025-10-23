@@ -1,29 +1,33 @@
+import React, { useEffect, useState } from "react";
+
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Placeholder from "@tiptap/extension-placeholder";
-import { Color } from "@tiptap/extension-color";
-import TextStyle from "@tiptap/extension-text-style";
-import {
+import Color from "@tiptap/extension-color";
+import { TextStyle } from '@tiptap/extension-text-style';
+import TableOfContents, {
   getHierarchicalIndexes,
-  TableOfContents,
-} from "@tiptap-pro/extension-table-of-contents";
+} from "@tiptap/extension-table-of-contents";
+import FileHandler from "@tiptap/extension-file-handler";
+import Image from "@tiptap/extension-image";
+import Link from "@tiptap/extension-link";
 
-import React, { useEffect, useState } from "react";
 import BubbleMenuBar from "components/BubbleMenuBar";
 import MenuBar from "components/MenuBar";
 import DragHandleBar from "components/DragHandleBar";
 import IsEditableMenu from "components/IsEditableMenu";
 import { ToC } from "components/ToC";
-import SlashBubbleMenuBar from "components/SlashBubbleMenuBar";
-import FileHandler from "@tiptap-pro/extension-file-handler";
-import Image from "@tiptap/extension-image";
-import Link from "@tiptap/extension-link";
+import CommentList from "components/CommentList";
+
 import CustomCodeBlockLowlight from "utils/CodeBlockIndent";
 import { Indent } from "utils/Indent";
-import "highlight.js/styles/stackoverflow-dark.min.css";
-import CommentList from "components/CommentList";
 import { useUser } from "hooks/useUser";
+
+import "highlight.js/styles/stackoverflow-dark.min.css";
+import SlashCommands from "extensions/commands/commands";
+import suggestion from 'extensions/commands/suggestion';
+
 
 const MemorizedToC = React.memo(ToC);
 
@@ -53,6 +57,9 @@ const TipTap = () => {
         },
       }),
       Image,
+      SlashCommands.configure({
+          suggestion,
+        }),
       Link.configure({
         openOnClick: true, // 링크 클릭 시 새 창에서 열기
         linkOnPaste: false, // URL 붙여넣기 시 자동 링크 생성 방지
@@ -217,7 +224,7 @@ const TipTap = () => {
         <div className="main">
           <IsEditableMenu isEditable={isEditable} editHandler={editHandler} />
           <MenuBar editor={editor} />
-          <div>{showMenu && <SlashBubbleMenuBar editor={editor} />}</div>
+          {/* <div>{showMenu && <SlashBubbleMenuBar editor={editor} />}</div> */}
           <div>
             {!showMenu && <BubbleMenuBar editor={editor} user={user} />}
           </div>

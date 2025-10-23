@@ -1,5 +1,5 @@
 import "styles/styles.scss";
-import DragHandle from "@tiptap-pro/extension-drag-handle-react";
+import DragHandle from '@tiptap/extension-drag-handle-react'
 import React from "react";
 
 const DragHandleBar = ({ editor }) => {

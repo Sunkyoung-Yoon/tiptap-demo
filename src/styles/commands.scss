@@ -1,0 +1,83 @@
+/* src/styles/commands.scss */
+
+/* Dropdown menu */
+.dropdown-menu {
+  background: var(--white);
+  border: 1px solid var(--gray-1);
+  border-radius: 0.7rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  overflow: auto;                 /* 스크롤 가능 */
+  padding: 0.4rem;
+  position: relative;
+  max-height: 320px;              /* 항목 많을 때 내부 스크롤 */
+  min-width: 260px;
+  z-index: 9999;                  /* 에디터 위로 보이도록 */
+
+  /* 버튼(항목) */
+  button {
+    align-items: center;
+    background-color: transparent;
+    display: flex;
+    gap: 0.5rem;                  /* 아이콘/텍스트 간격 */
+    text-align: left;
+    width: 100%;
+    border: none;
+    padding: 0.55rem 0.6rem;      /* 살짝 여유 */
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 120ms ease;
+
+    &:hover,
+    &:hover.is-selected {
+      background-color: var(--gray-3);
+    }
+
+    &.is-selected {
+      background-color: var(--gray-2);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    /* 아이콘 */
+    .cmd-icon {
+      display: inline-flex;
+      width: 1.5rem;
+      min-width: 1.5rem;
+      height: 1.5rem;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;           /* H1/H2 등 텍스트 아이콘 굵게 */
+      line-height: 1;
+      user-select: none;
+    }
+
+    /* 텍스트 그룹 (제목/부제목) */
+    .cmd-texts {
+      display: inline-flex;
+      flex-direction: column;
+      line-height: 1.15;
+      gap: 0.125rem;
+    }
+
+    .cmd-title {
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .cmd-subtitle {
+      font-size: 12px;
+      color: var(--gray-6);
+    }
+  }
+
+  /* 결과 없음 */
+  .item {
+    padding: 0.5rem 0.6rem;
+    color: var(--gray-6);
+  }
+}
